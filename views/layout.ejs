@@ -10,12 +10,32 @@
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.19/p5.js"></script>
-<<<<<<< HEAD
-=======
 
->>>>>>> bc4aeefa5db52e5e06896bcc7eeea1bc371f1fa0
+<!--changing background function-->
+	<script type="text/javascript">
+	var totalimgs = 12;
+	function bg_change() {
+		var count = Math.ceil(Math.random()*totalimgs);
+		document.body.background = "/images/bgimages/"+count+".svg";
+		document.body.background = "/images/bgimages/"+count+".svg";
+		//document.body.style.backgroundRepeat = "no-repeat";
+		//document.body.style.background.size = "50px";
+	}
+
+	</script>
+
+>>>>>>> style3
 </head>
 <body>
+
+<div id="background"></div>
+
+
+<!--background change function-->
+	<script type="text/javascript">
+	bg_change();
+	</script>
+
 	<!-- Spinning wheel as app-logo and homepage link -->
 	<a href="/">
 		<div class="logo-all">
@@ -26,17 +46,15 @@
 		</div>
 	</a>
 
+<div class="container">
+
 		<!-- navigation bar for when a session is found -->
 		<div class = "text-center">
-<<<<<<< HEAD
-=======
-
 			<div style="display:none" id="temp-entry-holder"></div>
->>>>>>> bc4aeefa5db52e5e06896bcc7eeea1bc371f1fa0
 			<% if (user) {%>
 				<h1><%= user.local.name || user.facebook.name %></h1>
 				<a href="/logout" class="btn btn-default btn-sm">Logout</a>
-				<a href="/profile" class="btn btn-default btn-sm">Favorites</a>
+				<a href="/profile" class="btn btn-default btn-sm">My Favorites</a>
 			<% if (user.local.name) {%>
 				<a href="/profile/<%= user.id%>/edit" class="btn btn-default btn-sm">Account Setting</a>
 				<% } %>
@@ -44,17 +62,21 @@
 				<div id="user" style="display: none"><% if (user) {%><%= JSON.stringify(user) %><%} %></div>
 			<!-- navigation bar for when no session is found -->
 			<% } else {%>
-				<a href="/session" class="btn btn-default btn-sm">Favorites</a>
+				<a href="/session" class="btn btn-default btn-sm">My Favorites</a>
 				<a href="/" class="btn btn-default btn-sm">Homepage</a>
 			<% } %>
 		</div>
-		<hr>
 
-	<div class="container">
+
 		<%- body %>
-	</div>
+</div>
 </body>
+
+
+
+
 </html>
+
 <script>
 	//Logo Canvas Script
 	// store the colors in an array
@@ -100,8 +122,8 @@
 	// call drawRouletteWheel continuously every 1/10 of a second
 	setInterval(drawRouletteWheel, 100)
 </script>
-<<<<<<< HEAD
-=======
+
+
 
 <script>
 //Logo Move
@@ -114,4 +136,3 @@
 //   });
 // });
 </script>
->>>>>>> bc4aeefa5db52e5e06896bcc7eeea1bc371f1fa0
