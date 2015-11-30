@@ -1,4 +1,7 @@
+
+
 <div class="col-sm-6 col-sm-offset-3">
+
     <h1>What do I eat?</h1>
 
     <form id="search-criteria" action="/result" method="post">
@@ -6,16 +9,14 @@
             <label>Near</label>
             <input type="text" id="location" class="form-control" name="location" placeholder="Current Location">
         </div>
-        <!-- Make an hidden input to store the longitutde/latitude(cll) and the city that the user is currently accessing the app from -->
-        <input type="hidden" id="cll" class="form-control" name="cll">
-        <input type="hidden" id="currentCity" class="form-control" name="currentCity">
 
         <div class="form-group">
           <label>Search by keyword</label>
             <input type="text" id="term" class="form-control" name="term" placeholder="burger, pizza, sushi...">
         </div>
+          <input type="hidden" id="cll" class="form-control" name="cll">
+          <input type="hidden" id="currentCity" class="form-control" name="currentCity">
 
-        <!-- Create a container to hold all the cuisines options -->
         <div class="form-group cuisines-container">
           <label class="form-control">
             <input type="checkbox" name="cuisines" class="cuisines-options" value="newamerican"> American (New)
@@ -27,6 +28,7 @@
             <input type="checkbox" name="cuisines" class="cuisines-options"
             value="asianfusion"> Asian Fusion
           </label>
+
           <label class="form-control">
             <input type="checkbox" name="cuisines" class="cuisines-options" value="breakfast_brunch"> Breakfast and Brunch
           </label>
@@ -35,17 +37,18 @@
           </label>
           <label class="form-control">
             <input type="checkbox" name="cuisines" class="cuisines-options" value="chinese"> Chinese
-          </label>
-          <label class="form-control">
+            </label>
+            <label class="form-control">
             <input type="checkbox" name="cuisines" class="cuisines-options" value="french"> French
           </label>
           <label class="form-control">
             <input type="checkbox" name="cuisines" class="cuisines-options" value="german"> German
           </label>
-          <label class="form-control">
-            <input type="checkbox" name="cuisines" class="cuisines-options" value="gluten_free"> Gluten-Free
-          </label>
-          <label class="form-control">
+
+            <label class="form-control">
+              <input type="checkbox" name="cuisines" class="cuisines-options" value="gluten_free"> Gluten-Free
+            </label>
+            <label class="form-control">
             <input type="checkbox" name="cuisines" class="cuisines-options" value="greek"> Greek
           </label>
           <label class="form-control">
@@ -101,6 +104,7 @@
         </div>
 
         <div class="shake-chunk">
+<<<<<<< HEAD
           <button disabled="true" type="submit" id="shake" class="btn btn-warning btn-l" onclick="audio.play()">Locating...</button>
         </div>
 
@@ -140,18 +144,82 @@
 
     // if geolocation works, then store the current latitude and longitude into cll field
     function success(position) {
+=======
+                <button disabled="true" type="submit" id="shake" class="btn btn-warning btn-l" onclick="audio.play()">Locating...</button>
+              </div>
+                <p id="location-status">Loading Current Location...<p>
+                    <p>
+                        <button type="button" id="favorite_button" class="btn btn-warning btn-l">
+                    <span class="glyphicon glyphicon-heart"></span> My Favorites
+                  </button>
+                </p>
+              </div>
+            </form>
+</div>
+<script>
+var audio = new Audio("images/whoosh.mp3")
+
+var latitude;
+var longitude;
+$.ajax({
+  url: '//freegeoip.net/json/',
+  type: 'POST',
+  dataType: 'jsonp',
+  success: function(location) {
+    console.log('found')
+    current = location.city,
+    zipCode = location.zipcode,
+    cll = location.latitude.toString() + "," + location.longitude.toString()
+  }
+})
+
+$('.cuisines-options').click(function(){
+  if ($(this).parent().hasClass('checked')){
+    $(this).parent().removeClass('checked')
+  }
+  else {
+    $(this).parent().addClass('checked')
+  }
+})
+
+
+$('#shake').click(function(){
+
+  if ($('#location').val() === "" && current) {
+          $('#location').val(current)
+        }
+// Logo Move
+$(document).ready(function(e) {
+  width = "+=" + $(document).width()
+            $(".logo-all").animate({
+
+            left: width
+          }, 800, function() {
+  if ($('#cll').val() === ""){
+      $('#cll').val(cll)
+  }
+      })
+    })
+  })
+
+
+$('document').ready(function(){
+  if (!navigator.geolocation) {
+    console.log('Device does not support this feature')
+  }
+
+  navigator.geolocation.getCurrentPosition(success, error)
+
+  function success(position) {
+>>>>>>> bc4aeefa5db52e5e06896bcc7eeea1bc371f1fa0
       var latitude = position.coords.latitude;
       var longitude = position.coords.longitude;
+      console.log(latitude,longitude)
       $('#cll').val(latitude+','+longitude)
-        $('#location-status').text('Current Location found!') // inform user location found
-        $('#shake').removeAttr('disabled') // allow the user to proceed once finished locating
-        $('#shake').text('Find Food!')
-    }
-
-    // if error..
-    function error() {
-      $('#location-status').text('Current Location Service Disabled (Notes: This would affect the accuracy of result)') // inform the user the result of not allowing geolocation
+      $('#location-status').text('Current Location found!')
+      $('#shake').removeAttr('disabled')
       $('#shake').text('Find Food!')
+<<<<<<< HEAD
       $('#shake').removeAttr('disabled') // allow the user to proceed
     }
   })
@@ -185,4 +253,12 @@
         })
       })
     })
+=======
+  }
+  function error() {
+    $('#location-status').text('Current Location Service Disabled (Notes: This would affect the accuracy of result)')
+    $('#shake').removeAttr('disabled')
+  }
+})
+>>>>>>> bc4aeefa5db52e5e06896bcc7eeea1bc371f1fa0
 </script>

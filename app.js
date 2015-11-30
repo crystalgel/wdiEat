@@ -62,6 +62,7 @@ app.use('/', shakerRoutes)
 app.use('/', favoriteRoutes)
 
 // start the server on port
-app.listen(port, function(){
+app.listen(port || 5000, function(){
 	console.log("Server Running!", port)
 })
+app.set('port', (process.env.PORT|| 3000))
